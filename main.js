@@ -100,13 +100,13 @@ let noTurnedYes = false;
    NO BUTTON STEPS
 ========================= */
 const stepsData = [
-  { text: "Soch lo 🤔", image: "assets/think.gif" },
-  { text: "Ek baar aur soch lo 😢", image: "assets/sadface.gif" },
-  { text: "Please maan jao 🥺", image: "assets/plz.gif" },
-  { text: "Itna bhaav mat khao 😠", image: "assets/attitude.gif" },
-  { text: "Sach me nahi? 😭", image: "assets/cry.gif" },
-  { text: "Cute ho yaar tum 😍", image: "assets/cute.gif" },
-  { text: "Last chance ❤️", image: "assets/loveme.gif" }
+  { text: "Alsa Soch lo 🤔", image: "assets/think.gif" },
+  { text: "Alsa Ek baar aur soch lo 😢", image: "assets/sadface.gif" },
+  { text: "Alsa Please maan jao 🥺", image: "assets/plz.gif" },
+  { text: "Alsa Itna bhaav mat khao 😠", image: "assets/attitude.gif" },
+  { text: "Alsa Sach me nahi? 😭", image: "assets/cry.gif" },
+  { text: "Alsa Cute ho yaar tum 😍", image: "assets/cute.gif" },
+  { text: "Alsa Last chance ❤️", image: "assets/loveme.gif" }
 ];
 
 noBtn.addEventListener("click", () => {
@@ -276,4 +276,5 @@ saveShot.addEventListener("click", () => {
     link.href = canvas.toDataURL();
     link.click();
   });
+
 });
