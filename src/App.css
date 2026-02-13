@@ -1,0 +1,137 @@
+/* Header styling */
+h1 {
+  text-align: center;
+  margin-top: 1rem;
+  color: #9d50bb;
+  font-size: 2rem; /* Responsive font size */
+}
+
+.main {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0eaf7;
+  background-repeat: no-repeat;
+  background-size:cover; /* Solid color background for contrast with the glass effect */
+  background-position: center;
+  color: #333;
+  margin: 0;
+  padding: 1rem, 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+  background-image: url('./assets/flowers2.jpg');
+  transition: background-image 2s ease-in-out, background-color 2s ease-in-out;
+}
+
+
+/* Enhanced glass effect for the question and choices container */
+.container {
+  background: rgba(255, 255, 255, 0.3); /* More transparency for a glassier look */
+  backdrop-filter: blur(20px); /* Increased blur for a deeper glass effect */
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  width: calc(100% - 2rem);
+  max-width: 36rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Choices styling with gradient hover animation */
+.choices {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Choices styling with animated gradient on hover */
+.choices div {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+  background-color: #eee; /* Initial background color */
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #333; /* Default text color */
+  transition: color 0.5s ease; /* Transition for text color */
+  z-index: 1;
+}
+
+.choices div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #9d50bb, #6e48aa, #9d50bb); /* Gradient background */
+  background-size: 200% 200%; /* Larger background size for the animation */
+  border-radius: 1rem;
+  opacity: 0;
+  color: white;
+  transition: opacity 0.5s ease;
+  z-index: -1; /* Smooth transition for visibility */
+}
+
+.choices div:hover::before {
+  opacity: 1; /* Show gradient on hover */
+  color: white;
+  animation: gradientAnimation 3s ease infinite; /* Apply the animation */
+}
+
+.choices div:hover {
+  color: #eee;
+}
+
+/* Flower result display adjustments */
+.flower-img {
+  width: 10rem;
+  height: 10rem;
+  background-size: cover;
+  background-position: center;
+  border-radius: 7px;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    padding: 0.8rem;
+    margin: 0.8rem;
+    border-radius: 0.8rem;
+  }
+
+  .choices div {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+.flowername {
+  display: inline-block;
+}

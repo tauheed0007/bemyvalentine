@@ -20,6 +20,17 @@ const music = document.getElementById("bgMusic");
 const awwSound = document.getElementById("awwSound");
 const musicBtn = document.getElementById("music");
 const themeBtn = document.getElementById("theme");
+const storyBtn = document.getElementById("story");
+
+// storyBtn.addEventListener("click", () => {
+//   window.location.href = "/flower.html";
+
+// });
+
+storyBtn?.addEventListener("click", () => {
+ window.location.href = "/valentine/index.html";
+
+});
 
 /* =========================
    STATE
@@ -84,7 +95,7 @@ musicBtn.addEventListener("click", () => {
     pauseMusic();
   }
 });
-
+let noTurnedYes = false;
 /* =========================
    NO BUTTON STEPS
 ========================= */
@@ -99,14 +110,51 @@ const stepsData = [
 ];
 
 noBtn.addEventListener("click", () => {
+  // If No already became Yes, then act like Yes
+  if (noTurnedYes) {
+    acceptLove();
+    return;
+  }
+
+  // Enable white text mode for steps
+  card.classList.add("no-mode");
+
+  // Show steps
   if (step < stepsData.length) {
     text.innerText = stepsData[step].text;
     img.style.backgroundImage = `url(${stepsData[step].image})`;
+
+    // If this is the LAST step ("Last chance ❤️"), convert No button into Yes
+    if (step === stepsData.length - 1) {
+      // Turn "No" into "Yes"
+      noBtn.textContent = "Yes";
+      noBtn.classList.remove("no");
+      noBtn.classList.add("yes");
+
+      // Stop it from running away
+      noBtn.removeEventListener("mouseenter", moveNoButton);
+      noBtn.removeEventListener("touchstart", moveNoButton);
+      noBtn.style.transform = "none";
+
+      // Next click should accept love
+      noTurnedYes = true;
+    }
+
     step++;
   } else {
     acceptLove();
   }
 });
+
+// noBtn.addEventListener("click", () => {
+//   if (step < stepsData.length) {
+//     text.innerText = stepsData[step].text;
+//     img.style.backgroundImage = `url(${stepsData[step].image})`;
+//     step++;
+//   } else {
+//     acceptLove();
+//   }
+// });
 
 /* 😈 No button runs away */
 function moveNoButton() {
@@ -131,6 +179,7 @@ function acceptLove() {
   noBtn.style.display = "none";
   giftBtn.style.display = "block";
   shareBtn.style.display = "block";
+  storyBtn.style.display = "block"; 
 
   confettiBurst();
 

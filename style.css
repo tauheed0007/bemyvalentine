@@ -566,3 +566,57 @@ body {
     color: #3a003a;
   }
 }
+
+/* When No is clicked, make the question (and any other text you want) white */
+#card.no-state .question {
+  color: #fff !important;
+}
+
+/* If other text appears and you want it white too, add selectors */
+#card.no-state button,
+#card.no-state .gift-cover span {
+  color: #fff;
+}
+
+/* When user is in "No steps" mode, make the question text white */
+#card.no-mode .question {
+  color: #fff !important;
+}
+
+/* Hide these until user accepts love */
+#gift, #share, #story {
+  display: none;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+/* Pink button style (Gift + Story same) */
+#gift, #story {
+  background: linear-gradient(135deg, #ff3ea5, #ff0f7b);
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(255, 62, 165, 0.35);
+}
+
+#gift:active, #story:active, #share:active {
+  transform: scale(0.98);
+}
+
+/* Keep Share as your green */
+#share {
+  background: linear-gradient(135deg, #19d36b, #11b15a);
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(25, 211, 107, 0.30);
+}
+
+/* Optional: make story text a bit smaller so it fits nicely */
+#story {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
