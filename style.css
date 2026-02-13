@@ -1,0 +1,622 @@
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --accent-color: #c9184a;
+    --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+    --white: #ffffff;
+    --font-heading: 'Great Vibes', cursive;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: var(--font-body);
+    background: var(--bg-gradient);
+    user-select: none; /* Prevent selection during game */
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* UI Layer */
+#ui-layer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#score-board {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.progress-bar {
+    width: 150px;
+    height: 15px;
+    background: #ffe5ec;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--secondary-color);
+}
+
+#love-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: width 0.3s ease-out;
+}
+
+/* Screens */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 240, 243, 0.9);
+    z-index: 20;
+    transition: opacity 0.5s ease;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none; /* simple hide for logic */
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #590d22;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(201, 24, 74, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 24, 74, 0.4);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+#start-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.yes-btn {
+    background: #2dc653;
+    color: white;
+    font-size: 1.5rem;
+    padding: 20px 60px;
+}
+
+.no-btn {
+    background: #ffb703;
+    color: white;
+    position: relative;
+    transition: all 0.2s;
+}
+
+/* Animations */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.1); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+}
+
+.proposal-content h1 {
+    animation: heartbeat 2s infinite;
+}
+/* ======================
+   RESET
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+button {
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ======================
+   BODY
+====================== */
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #09001f, #12002b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+}
+
+/* ======================
+   TOP BUTTONS
+====================== */
+#music,
+#theme {
+  position: fixed;
+  top: 18px;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  font-size: 14px;
+  transition: transform 0.25s ease;
+  z-index: 20;
+}
+
+#music { right: 90px; }
+#theme { right: 20px; }
+
+#music:hover,
+#theme:hover {
+  transform: scale(1.1);
+}
+
+/* ======================
+   CONTAINER
+====================== */
+.container {
+  position: relative;
+  width: 340px;
+  max-width: 92vw;
+}
+
+/* ======================
+   CARD
+====================== */
+.card {
+  width: 100%;
+  min-height: 480px;
+  padding: 22px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 60px rgba(255, 0, 150, 0.4);
+  text-align: center;
+  animation: popIn 0.7s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ======================
+   IMAGE
+====================== */
+.image {
+  height: 170px;
+  background: url("assets/loveme.gif") center / contain no-repeat;
+}
+
+/* ======================
+   TEXT
+====================== */
+.question {
+  margin: 20px 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* ======================
+   YES / NO BUTTONS
+====================== */
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #ff4ecd, #ff007a);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 8px 20px rgba(255, 0, 122, 0.5);
+}
+
+.no {
+  background: linear-gradient(135deg, #444, #222);
+  position: relative;
+}
+
+/* ======================
+   GIFT & SHARE
+====================== */
+#gift,
+#share {
+  display: none;
+  margin-top: 18px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.25s ease;
+}
+
+#gift {
+  background: linear-gradient(135deg, #ff4ecd, #ff007a);
+  animation: pulse 1.5s infinite;
+}
+
+#share {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.6);
+}
+
+#share:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px pink; }
+  50% { box-shadow: 0 0 30px pink; }
+  100% { box-shadow: 0 0 10px pink; }
+}
+
+/* ======================
+   GIFT COVER
+====================== */
+.gift-cover {
+  position: absolute;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 5;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ======================
+   POPUP
+====================== */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 50;
+}
+
+.popup-box {
+  background: linear-gradient(135deg, #fff0f6, #ffe3ec);
+  color: #3a003a;
+  padding: 35px 25px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 320px;
+  animation: scaleUp 0.4s ease;
+  box-shadow: 0 0 40px rgba(255, 0, 120, 0.4);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ======================
+   POPUP CONTENT
+====================== */
+.popup-heart {
+  font-size: 44px;
+  animation: heartBeat 1.2s infinite;
+}
+
+.popup-text {
+  margin: 18px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.popup-actions button {
+  padding: 12px 32px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff4ecd, #ff007a);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(255, 0, 120, 0.4);
+  transition: transform 0.25s ease;
+}
+
+.popup-actions button:first-child {
+  margin-bottom: 5px;
+}
+
+.popup-actions button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* ======================
+   FLOATING HEARTS
+====================== */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: float 4s linear;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* ======================
+   CONFETTI
+====================== */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  animation: confettiFall 1.5s ease-out forwards;
+  z-index: 999;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+/* ======================
+   💍 PROPOSAL RING
+====================== */
+.ring {
+  font-size: 64px;
+  display: inline-block;
+  animation: ringPop 1.2s ease forwards;
+  filter: drop-shadow(0 0 15px gold);
+}
+
+@keyframes ringPop {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.3) rotate(20deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* ======================
+   💌 SCREENSHOT MODE
+   (Cleaner image)
+====================== */
+.screenshot-mode {
+  box-shadow: none !important;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7) !important;
+}
+
+.screenshot-mode .btn,
+.screenshot-mode #music,
+.screenshot-mode #theme {
+  display: none !important;
+}
+
+/* ======================
+   🧠 REMEMBER YES FOREVER
+====================== */
+.love-accepted {
+  animation: loveGlow 2s infinite alternate;
+}
+
+@keyframes loveGlow {
+  from {
+    box-shadow: 0 0 30px rgba(255, 0, 120, 0.4);
+  }
+  to {
+    box-shadow: 0 0 70px rgba(255, 0, 120, 0.9);
+  }
+}
+
+/* ======================
+   💖 FLOATING EMOJIS (POPUP)
+====================== */
+.popup::after {
+  content: "💖 💕 💗 💓 💞";
+  position: absolute;
+  bottom: 15%;
+  font-size: 22px;
+  opacity: 0.7;
+  animation: emojiFloat 4s infinite linear;
+}
+
+@keyframes emojiFloat {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(20px);
+  }
+}
+
+/* ======================
+   🌙 AUTO DARK / LIGHT
+====================== */
+@media (prefers-color-scheme: light) {
+  body {
+    background: linear-gradient(135deg, #ffe6f0, #ffd6e8);
+    color: #3a003a;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    color: #3a003a;
+  }
+
+  #music,
+  #theme {
+    background: rgba(0, 0, 0, 0.1);
+    color: #3a003a;
+  }
+}
+
+/* When No is clicked, make the question (and any other text you want) white */
+#card.no-state .question {
+  color: #fff !important;
+}
+
+/* If other text appears and you want it white too, add selectors */
+#card.no-state button,
+#card.no-state .gift-cover span {
+  color: #fff;
+}
+
+/* When user is in "No steps" mode, make the question text white */
+#card.no-mode .question {
+  color: #fff !important;
+}
+
+/* Hide these until user accepts love */
+#gift, #share, #story {
+  display: none;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+/* Pink button style (Gift + Story same) */
+#gift, #story {
+  background: linear-gradient(135deg, #ff3ea5, #ff0f7b);
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(255, 62, 165, 0.35);
+}
+
+#gift:active, #story:active, #share:active {
+  transform: scale(0.98);
+}
+
+/* Keep Share as your green */
+#share {
+  background: linear-gradient(135deg, #19d36b, #11b15a);
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(25, 211, 107, 0.30);
+}
+
+/* Optional: make story text a bit smaller so it fits nicely */
+#story {
+  font-size: 14px;
+  line-height: 1.2;
+}
+

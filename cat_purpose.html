@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Love Me ❤️</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 🔊 Music Toggle -->
+  <button id="music" aria-label="Toggle music">🔊</button>
+
+  <!-- 🎨 Theme -->
+  <button id="theme" aria-label="Change theme">🎨</button>
+
+  <!-- 💌 MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- 💖 CARD -->
+    <div class="card" id="card">
+
+      <!-- IMAGE / GIF -->
+      <div class="image" id="img"></div>
+
+      <!-- QUESTION -->
+      <p class="question" id="text">
+        Do you love me? ❤️
+      </p>
+
+      <!-- YES / NO -->
+      <div class="buttons">
+        <button class="btn yes">Yes</button>
+        <button class="btn no">No</button>
+      </div>
+
+      <!-- 🎁 GIFT -->
+      <button id="gift">🎁 Claim Your Gift</button>
+
+      <!-- 💌 SHARE -->
+      <button id="share">💌 Share on WhatsApp</button>
+
+      <button id="story">🌸 I have a story for you,but after claiming gift please </button>
+
+    </div>
+
+    <!-- 🎀 GIFT COVER -->
+    <div class="gift-cover" id="cover">
+      <span>Tap to open 🎀</span>
+    </div>
+  </div>
+
+  <!-- 💖 POPUP / PROPOSAL -->
+  <div class="popup" id="popup" role="dialog" aria-modal="true">
+    <div class="popup-box">
+
+      <span class="popup-heart">💖</span>
+
+      <h2>For You 💕</h2>
+
+      <p class="popup-text">
+  Alsa,<br><br>
+  You are not just special… you are rare. In a world where everything feels fast and noisy, you feel like peace. Your presence has a softness that makes things better without even trying—like calm after a long day, like a quiet smile that fixes everything. I don’t know how you do it, but you have this way of making moments feel warmer and life feel lighter. 💗<br><br>
+
+  I want you to know that you matter—more than you realize. Your kindness, your heart, your little ways of caring… they don’t go unnoticed. You have something beautiful inside you: the kind of beauty that isn’t just seen, it’s felt. And honestly, you inspire the best version of me. You make me want to be more gentle, more grateful, more real. ✨<br><br>
+
+  So if no one told you today, let me be the one to say it: you are loved, you are valued, and you are truly one of a kind. And I’m thankful—so thankful—that you exist in my world. Thank you for choosing love… thank you for choosing us. ❤️
+</p>
+
+
+      <!-- <p class="popup-text">
+        You are not just special…<br>
+        You are the reason for my smile today 😊<br><br>
+        Thank you for choosing love ❤️
+      </p> -->
+
+      <div class="popup-actions">
+        <button id="closePopup">Aww 🥰</button>
+        <button id="saveShot">📸 Save Memory</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 🎵 BACKGROUND MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="assets/kyatujhy.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- 🔊 POPUP SOUND -->
+  <audio id="awwSound">
+    <source src="assets/aww.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- 📸 SCREENSHOT LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- MAIN SCRIPT -->
+  <script src="main.js"></script>
+
+</body>
+</html>
